@@ -2,9 +2,12 @@ const express = require('express');
 const router = express.Router();
 const tweetBank = require('../tweetBank');
 
-router.get('/', (req, res) => {
+let allTweets = (req, res) => {
   res.render('index', {tweets: tweetBank.list()});
-});
+};
+
+router.get('/', allTweets);
+router.get('/tweets', allTweets);
 
 router.get('/users/:name', (req, res) => {
   var name = req.params.name;

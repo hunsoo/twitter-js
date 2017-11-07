@@ -3,7 +3,7 @@ const app = express();
 const volleyball = require('volleyball');
 const morgan = require('morgan');
 const nunjucks = require('nunjucks');
-const bodyParser = require('body-parser');
+//const bodyParser = require('body-parser');
 const socketio = require('socket.io');
 
 const routes = require('./routes');
@@ -18,23 +18,27 @@ nunjucks.configure('views', { noCache: true }); // point nunjucks to the proper 
 app.use(express.static('public'));
 
 // body-parser
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
-// parse application/json
-app.use(bodyParser.json());
+//parse application/x-www-form-urlencoded
+// app.use(bodyParser.urlencoded({ extended: false }));
+// // parse application/json
+// app.use(bodyParser.json());
+
+// express built-in body parser
+app.use(express.json());
+app.use(express.urlencoded());
 
 // logging
 // volleyball
 app.use(volleyball);
 
 // morgan
-// app.use(morgan((req, res) => {
-//   let result = 'All request params:\n';
-//   for (let key in req.body) {
-//     result += `${key}: ${req.body[key]}\n`;
-//   }
-//   return result;
-// }));
+app.use(morgan((token, req, res) => {
+  let result = '***All request params***\n';
+  for (let key in req.params) {
+    result += `${key}: ${req.params[key]}\n`;
+  }
+  return result;
+}));
 
 // app.use((req, res, next) => {
 //   // do your logging here

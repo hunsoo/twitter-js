@@ -37,7 +37,9 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Twitter.js</a>
+            <a class="navbar-brand" href="/">
+              <img src="/images/twitter.png" style="max-width:50px; margin-top: -5px;">
+            </a>
           </div>
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
@@ -92,8 +94,11 @@
         // some logic to add the new tweet to the DOM…
         let tweetsList = document.getElementById('tweetsList');
         let newTweet = document.createElement('li');
+        newTweet.classList.add('tweetbox');
         newTweet.innerHTML = `
-        <a href="/users/${tweet.name}">${tweet.name}</a> - ${tweet.content}
+          <img src="http://lorempixel.com/48/48?id=${tweet.id}">
+          <p class="content by"><a href="/users/${tweet.name}">${tweet.name} (${tweet.userId})</a></p>
+          <p class = "content">${tweet.content}</p>
         `;
         tweetsList.appendChild(newTweet);
       });

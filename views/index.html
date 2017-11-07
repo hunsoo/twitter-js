@@ -7,31 +7,39 @@
   </div>
   <div class="row">
     <div class="col-md-3">
-      <img src="https://pbs.twimg.com/profile_images/2450268678/olxp11gnt09no2y2wpsh_normal.jpeg"><br>
-      <b>Mark Lopez</b><br>
+      <!--
+      <img src="https://pbs.twimg.com/profile_images/2450268678/olxp11gnt09no2y2wpsh_normal.jpeg">
+      -->
+      <img src="/images/mark.png" height="100" width="100">
+      <br>
+      <b>Mark Lopez (@mark)</b><br>
       100 followers
     </div>
     <div class="col-md-9">
-      {% if showForm %}
-        <form action="/tweets" method="POST">
-          <label for="name_field">Name:</label>
-          <input name="name" type="text" id="name_field" value="{{name}}"/>
-
-          <label for="text_field">Text:</label>
-          <input name="text" type="text" id="text_field" style="width: 350px;" />
-
-          <input type="submit" value="Submit" />
-        </form>
-      {% endif %}
       <!-- display tweets here -->
       <ul id="tweetsList">
       {% for tweet in tweets %}
-        <li>
-
-          <a href="/users/{{tweet.name}}">{{tweet.name}}</a> - {{tweet.content}}
+        <li class="tweetbox">
+          <img src="http://lorempixel.com/48/48?id={{tweet.id}}">
+          <p class="content by"><a href="/users/{{tweet.name}}">{{tweet.name}} ({{tweet.userId}})</a></p>
+          <p class = "content">{{tweet.content}}</p>
         </li>
       {% endfor %}
       </ul>
+      <!-- new tweet form -->
+      {% if showForm %}
+      <div class="newTweet clearfix">
+        <form action="/tweets" method="POST">
+          <div class="form-group">
+            <label for="name_field">Name:</label>
+            <input name="name" type="text" id="name_field" value="{{name}}" class="form-control"/>
+            <label for="text_field">Text:</label>
+            <textarea name="text" row="4" id="text_field" class="form-control"></textarea>
+          </div>
+          <input type="submit" value="Tweet" class="btn btn-primary pull-right"/>
+        </form>
+      </div>
+      {% endif %}
     </div>
   </div>
 

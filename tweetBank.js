@@ -4,7 +4,8 @@ let data = [];
 let idCount = 0;
 
 function add (name, content) {
-  data.push({ name: name, content: content, id: idCount++ });
+  let userId = '@' + name.split(' ')[0].toLowerCase();
+  data.push({userId: userId, name: name, content: content, id: idCount++ });
 }
 
 function list () {
